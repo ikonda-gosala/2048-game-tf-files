@@ -15,7 +15,7 @@ resource "aws_subnet" "subnet1" {
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = true
   tags = {
-    Name = "sunet1"
+    Name = "subnet1"
   }
 }
 
@@ -39,6 +39,10 @@ resource "aws_route_table" "public_rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
+}
+resource "aws_route_table_association" "a1" {
+  subnet_id = aws_subnet.subnet1.id
+  route_table_id = aws_route_table.public_rt.id
 }
 resource "aws_route_table_association" "a2" {
   subnet_id = aws_subnet.subnet2.id
